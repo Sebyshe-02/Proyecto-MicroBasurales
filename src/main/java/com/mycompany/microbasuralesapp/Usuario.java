@@ -19,10 +19,11 @@ import java.util.Scanner;
  */
 public class Usuario {
     //Globales
-    public ArrayList<Usuario> Lusuarios=new ArrayList<Usuario>();
-    private ArrayList<Basurero> LBasureros=new ArrayList<Basurero>();
-    private ArrayList<MicroBasural> LMicroBasurales=new ArrayList<MicroBasural>();
-            
+    
+    public ArrayList<Consejo> LConsejos=new ArrayList<Consejo>();
+    public ArrayList<MicroBasural> LMicroBasurales=new ArrayList<MicroBasural>();
+    public Usuario usuarios=new Usuario();
+           
     //Atributos
     private String Nickname;
     private String Nombre;
@@ -30,9 +31,10 @@ public class Usuario {
     private String ID;
     
     public Usuario(){
-        LBasureros=new ArrayList<Basurero>();
-        LMicroBasurales=new ArrayList<MicroBasural>();
+        
     }
+    
+    
     /**
      * 
      * @param Nickname
@@ -115,23 +117,23 @@ public class Usuario {
      * 
      * @param Objeto 
      */
-    public void CrearUsuario(Usuario Objeto){
+    public Usuario CrearUsuario(){
         
+        Usuario nuevoUsuario=new Usuario();
         
         Scanner Entrada=new Scanner(System.in);
         System.out.println("Ingresar un Nickname");
-        Objeto.Nickname=Entrada.next();
+        nuevoUsuario.Nickname=Entrada.next();
         
         System.out.println("Ingresar Nombre");
-        Objeto.Nombre=Entrada.next();
+        nuevoUsuario.Nombre=Entrada.next();
         
         System.out.println("Ingrese un Correo");
-        Objeto.Correo=Entrada.next();
+        nuevoUsuario.Correo=Entrada.next();
         
-        Lusuarios.add(Objeto);
-        
-        System.out.println("Usuario creado con exito!!");  
-        
+        System.out.println("Usuario creado con exito!!");
+        return nuevoUsuario;
+
         //La ID no se agrego al codigo porque genero error. Esta variable se agregara proximamente.
     }
     
@@ -227,25 +229,49 @@ public class Usuario {
      * @return 
      */
     public Usuario BuscarUsuario(String nickname){
-        
-        for(int i=0;i<Lusuarios.size();i++){
             
-            if(Lusuarios.get(i).Nickname.equals(nickname)){
-                System.out.println("Nickname: "+Lusuarios.get(i).Nickname);
-                System.out.println("Nombre: "+Lusuarios.get(i).Nombre);
-                System.out.println("Correo: "+Lusuarios.get(i).Correo);
-                return Lusuarios.get(i);
-            }
+        if(usuarios.Nickname.equals(nickname)){
+            System.out.println("Nickname: "+usuarios.Nickname);
+            System.out.println("Nombre: "+usuarios.Nombre);
+            System.out.println("Correo: "+usuarios.Correo);
+            return usuarios;
         }
         return null;
     }
     
     public void MostrarLista(){
         
-        for(int i =0;i<Lusuarios.size();i++){
-                System.out.println("Nombre de usuario: "+Lusuarios.get(i).Nickname);
-                System.out.println("Nombre: "+Lusuarios.get(i).Nombre);
-                System.out.println("Correo electronico: "+Lusuarios.get(i).Correo);
-        }
+        System.out.println("Nombre de usuario: "+usuarios.Nickname);
+        System.out.println("Nombre: "+usuarios.Nombre);
+        System.out.println("Correo electronico: "+usuarios.Correo);
     } 
+    
+    public int Eliminar(String ID){
+        
+        if(ID.equals(usuarios.ID)){
+            usuarios=null;
+            return 0;
+        }
+        return 1;
+    }
+
+    public void Actualizar(String ID){
+        
+        Usuario nuevoUsuario=new Usuario();
+        
+        Scanner Entrada=new Scanner(System.in);
+        System.out.println("Ingresar un Nickname");
+        nuevoUsuario.Nickname=Entrada.next();
+        
+        System.out.println("Ingresar Nombre");
+        nuevoUsuario.Nombre=Entrada.next();
+        
+        System.out.println("Ingrese un Correo");
+        nuevoUsuario.Correo=Entrada.next();
+        
+        usuarios.setNickname(nuevoUsuario.Nickname);
+        usuarios.setNombre(nuevoUsuario.Nombre);
+        usuarios.setCorreo(nuevoUsuario.Correo);
+        
+    }
 }

@@ -3,6 +3,7 @@ package com.mycompany.microbasuralesapp;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Scanner;
 /**
  *
@@ -23,6 +24,7 @@ public class Main {
      */
     public static void main(String args[]) throws ParseException{
         
+        ArrayList<Usuario> Lusuarios=new ArrayList<Usuario>();
         Scanner Entrada;
         int opcion;
         String buffer;
@@ -50,21 +52,65 @@ public class Main {
                         System.out.println("1- Crear Usuario");
                         System.out.println("2- Buscar Usuario");
                         System.out.println("3- Mostrar Lista de Usuarios");
+                        System.out.println("4- Actualizar Usuario");
+                        System.out.println("5- Eliminar Usuario");
                         switch(opcion){
                             case 1:
-                                usuario.CrearUsuario(usuario);
+                                Lusuarios.add(usuario.CrearUsuario());
                             break;
 
                             case 2:
                                 buffer=Entrada.next();
-                                usuario.BuscarUsuario(buffer);
+                                int flag=0;
+                                for(int i=0;i<Lusuarios.size();i++){
+                                    if(usuario.BuscarUsuario(buffer) != null){
+                                        System.out.println("Usuario encontrado");
+                                        flag = 1;
+                                        break;
+                                    }
+                                }
+                                if(flag == 0){
+                                    System.out.println("No se encontro el usuario");
+                                }    
                             break;
                                 
                             case 3:
-                                usuario.MostrarLista();
+                                for(int i=0;i<Lusuarios.size();i++){
+                                    usuario.MostrarLista();
+                                }
+                            break;
+                            
+                            case 4:
+                                buffer = Entrada.next();
+                                int fflag1 = 0;
+                                for(int i=0;i<Lusuarios.size();i++){
+                                    if(buffer.equals(Lusuarios.get(i).usuarios.getID())){
+                                        Lusuarios.get(i).usuarios.Actualizar(buffer);
+                                        System.out.println("Se actualizo con exito el usuario");
+                                        fflag1 = 1;
+                                    }
+                                }
+                                if(fflag1 == 0){
+                                    System.out.println("No se pudo modificar el usuario");
+                                }
+                            break;
+                            
+                            case 5:
+                                buffer= Entrada.next();
+                                int Flag = 0;
+                                for(int i=0;i<Lusuarios.size();i++){
+                                    if(Lusuarios.get(i).usuarios.Eliminar(buffer) == 0){
+                                        Lusuarios.remove(i);
+                                        System.out.println("Se elimino con exito el usuario");
+                                        Flag = 1;
+                                    }
+                                }
+                                if(Flag == 0){
+                                    System.out.println("No existe el usuario ingresado");
+                                }
                             break;
                         }
-                    }while(opcion != 4);
+                    }while(opcion != 6);
                 break;
                 
                 case 2:
@@ -152,26 +198,59 @@ public class Main {
                         switch(opcion){
                             
                             case 1:
-                                microbasural.Crear(microbasural);
+                                usuario.LMicroBasurales.add(microbasural.Crear());
                             break;
                             
                             case 2:
-                                microbasural.MostrarListaMicrobasurales();
+                                for(int i=0;i<usuario.LMicroBasurales.size();i++){
+                                    microbasural.MostrarListaMicrobasurales();
+                                }
                             break;
                             
                             case 3:
                                 buffer=Entrada.next();
-                                microbasural.BuscarCalle(buffer);
+                                int flag = 0;
+                                for(int i=0;i<usuario.LMicroBasurales.size();i++){
+                                    if(microbasural.BuscarCalle(buffer) != null){
+                                        System.out.println("Se encontro un microbasural en esa calle");
+                                        flag = 1;
+                                    }
+                                }
+                                if(flag == 0){
+                                    System.out.println("No se encontro");
+                                }
+                                
                             break;
                             
                             case 4:
                                 bufferInt= Entrada.nextInt();
-                                microbasural.Actualizar(bufferInt);
+                                int fflag = 0;
+                                for(int i=0;i<usuario.LMicroBasurales.size();i++){
+                                    if(usuario.LMicroBasurales.get(i).MB.getID() == bufferInt){
+                                        microbasural.Actualizar(bufferInt);
+                                        System.out.println("Se actualizo con exito el microbasural");
+                                        fflag = 1;
+                                    }
+                                }
+                                if(fflag == 0){
+                                    System.out.println("No se pudo modificar el microbasural");
+                                }
                             break;
                             
                             case 5:
                                 bufferInt= Entrada.nextInt();
-                                microbasural.Eliminar(bufferInt);
+                                int Flag = 0;
+                                for(int i=0;i<usuario.LMicroBasurales.size();i++){
+                                    if(microbasural.Eliminar(bufferInt) == 0){
+                                        usuario.LMicroBasurales.remove(i);
+                                        System.out.println("Se elimino con exito el microbasural");
+                                        Flag = 1;
+                                    }
+                                }
+                                if(Flag == 0){
+                                    System.out.println("No existe el microbasural ingresado");
+                                }
+                                
                             break;
                         }
                     }while(opcion != 6);

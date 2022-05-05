@@ -19,8 +19,7 @@ import java.util.Scanner;
  */
 public class MicroBasural {
     
-    //Globales
-    private ArrayList<MicroBasural> LMicroBasurales=new ArrayList<MicroBasural>();
+    public MicroBasural MB=new MicroBasural();
     
     //Atributos
     private float Longitud;
@@ -131,22 +130,24 @@ public class MicroBasural {
      * 
      * @param Objeto 
      */
-    public void Crear(MicroBasural Objeto){
+    public MicroBasural Crear(){
         //Crea un objeto de tipo microbasural
+        
+        MicroBasural nuevoMB=new MicroBasural();
+        
         Scanner Entrada=new Scanner(System.in);
         System.out.println("Longitud: ");
-        Objeto.Longitud= Entrada.nextFloat();
+        nuevoMB.Longitud= Entrada.nextFloat();
         
         System.out.println("Latitud: ");
-        Objeto.Latitud= Entrada.nextFloat();
+        nuevoMB.Latitud= Entrada.nextFloat();
         System.out.println("Calle: ");
-        Objeto.Calle= Entrada.next();
+        nuevoMB.Calle= Entrada.next();
         System.out.println("NumeroCalle");
-        Objeto.NumeroCalle= Entrada.nextInt();
-        
-        LMicroBasurales.add(Objeto);
+        nuevoMB.NumeroCalle= Entrada.nextInt();
         
         System.out.println("Creado con exito!!");  
+        return nuevoMB;
         
         //La ID no se agrego al codigo porque genero error. Esta variable se agregara proximamente.
     }
@@ -237,36 +238,53 @@ public class MicroBasural {
     }
     
     public void MostrarListaMicrobasurales(){
-        
-        for(int i =0;i<LMicroBasurales.size();i++){
-                System.out.println("Longitud: "+LMicroBasurales.get(i).Longitud);
-                System.out.println("Latitud: "+LMicroBasurales.get(i).Latitud);
-                System.out.println("Calle: "+LMicroBasurales.get(i).Calle);
-                System.out.println("Numero de Calle: "+LMicroBasurales.get(i).NumeroCalle);
-        }
+      
+        System.out.println("Longitud: "+MB.Longitud);
+        System.out.println("Latitud: "+MB.Latitud);
+        System.out.println("Calle: "+MB.Calle);
+        System.out.println("Numero de Calle: "+MB.NumeroCalle);
     }
     
     public MicroBasural BuscarCalle(String calle){
-        
-        for(int i=0;i<LMicroBasurales.size();i++){
             
-            if(LMicroBasurales.get(i).Calle.equals(calle)){
-                System.out.println("Longitud: "+LMicroBasurales.get(i).Longitud);
-                System.out.println("Latitud: "+LMicroBasurales.get(i).Latitud);
-                System.out.println("Calle: "+LMicroBasurales.get(i).Calle);
-                System.out.println("Numero de Calle: "+LMicroBasurales.get(i).NumeroCalle);
-                return LMicroBasurales.get(i);    
-            }
+        if(MB.Calle.equals(calle)){
+            System.out.println("Longitud: "+MB.Longitud);
+            System.out.println("Latitud: "+MB.Latitud);
+            System.out.println("Calle: "+MB.Calle);
+            System.out.println("Numero de Calle: "+MB.NumeroCalle);
+            return MB;    
         }
-        
         return null;
     }
     
-    public void Eliminar(int ID){
-        //Busca el basurero indicado por la ID y lo elimina
+    public int Eliminar(int ID){
+        
+        if(MB.ID == ID){
+            MB=null;
+            return 0;
+        }
+        return 1;
     }
 
     public void Actualizar(int ID){
-        //Modifica un objeto.microbasural ya creado
+        
+        MicroBasural nuevoMB=new MicroBasural();
+        
+        Scanner Entrada=new Scanner(System.in);
+        System.out.println("Longitud: ");
+        nuevoMB.Longitud= Entrada.nextFloat();
+        
+        System.out.println("Latitud: ");
+        nuevoMB.Latitud= Entrada.nextFloat();
+        System.out.println("Calle: ");
+        nuevoMB.Calle= Entrada.next();
+        System.out.println("NumeroCalle");
+        nuevoMB.NumeroCalle= Entrada.nextInt();
+        
+        MB.setLongitud(nuevoMB.Longitud);
+        MB.setLatitud(nuevoMB.Latitud);
+        MB.setCalle(nuevoMB.Calle);
+        MB.setNumeroCalle(nuevoMB.NumeroCalle);
+        
     }
 }
