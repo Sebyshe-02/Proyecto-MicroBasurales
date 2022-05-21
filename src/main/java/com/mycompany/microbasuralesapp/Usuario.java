@@ -17,7 +17,7 @@ import java.util.Scanner;
  * @author Luz Pinto Castillo
  * @author Sebastian Henriquez Cartagena
  */
-public class Usuario {
+public class Usuario implements Interfaz{
     //Globales
     
     public ArrayList<Consejo> LConsejos=new ArrayList<Consejo>();
