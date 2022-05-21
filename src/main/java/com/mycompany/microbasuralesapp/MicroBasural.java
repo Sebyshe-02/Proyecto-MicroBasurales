@@ -17,35 +17,18 @@ import java.util.Scanner;
  * @author Luz Pinto Castillo
  * @author Sebastian Henriquez Cartagena
  */
-public class MicroBasural {
+public class MicroBasural extends Caracteristicas implements Interfaz{
     
     public MicroBasural MB=new MicroBasural();
-    
-    //Atributos
-    private float Longitud;
-    private float Latitud;
-    private int ID;
-    private String Calle;
-    private int NumeroCalle;
-    /**
-     * 
-     * @param Longitud
-     * @param Latitud
-     * @param ID
-     * @param Calle
-     * @param NumeroCalle 
-     */
-    public MicroBasural(float Longitud, float Latitud, int ID, String Calle, int NumeroCalle) {
-        this.Longitud = Longitud;
-        this.Latitud = Latitud;
-        this.ID = ID;
-        this.Calle = Calle;
-        this.NumeroCalle = NumeroCalle;
+
+    public MicroBasural(float Latitud, float Longitud, int NCalle, String Calle) {
+        super(Latitud, Longitud, NCalle, Calle);
+    }
+
+    public MicroBasural() {
     }
     
-    public MicroBasural(){
-        
-    }
+
 
     //Accesores
     
@@ -81,48 +64,10 @@ public class MicroBasural {
      * 
      * @return 
      */
-    public int getNumeroCalle(){
-        return NumeroCalle;
+    public int getNCalle(){
+        return NCalle;
     }
 
-
-    //Mutadores
-    
-    /**
-     * 
-     * @param Latitud1 
-     */
-    public void setLatitud(float Latitud1){
-        Latitud = Latitud1;
-    }
-    /**
-     * 
-     * @param Longitud1 
-     */
-    public void setLongitud(float Longitud1){
-        Longitud = Longitud1;
-    }
-    /**
-     * 
-     * @param ID1 
-     */
-    public void setID(int ID1){
-        ID = ID1;
-    }
-    /**
-     * 
-     * @param NumeroCalle1 
-     */
-    public void setNumeroCalle(int NumeroCalle1){
-        NumeroCalle = NumeroCalle1;
-    }
-    /**
-     * 
-     * @param Calle1 
-     */
-    public void setCalle(String Calle1){
-        Calle=Calle1;
-    }
 
     //Comportamiento
     
@@ -144,7 +89,7 @@ public class MicroBasural {
         System.out.println("Calle: ");
         nuevoMB.Calle= Entrada.next();
         System.out.println("NumeroCalle");
-        nuevoMB.NumeroCalle= Entrada.nextInt();
+        nuevoMB.NCalle= Entrada.nextInt();
         
         System.out.println("Creado con exito!!");  
         return nuevoMB;
@@ -162,7 +107,7 @@ public class MicroBasural {
             BufferedWriter bfwriter=new BufferedWriter(flwriter);
             for(MicroBasural microbasural :(ArrayList<MicroBasural>)LMicroBasurales){
                 //escribe los datos en archivo
-                bfwriter.write(microbasural.getLongitud()+";"+microbasural.getLatitud()+";" +microbasural.getID()+";"+microbasural.getCalle()+";"+microbasural.getNumeroCalle());
+                bfwriter.write(microbasural.getLongitud()+";"+microbasural.getLatitud()+";" +microbasural.getID()+";"+microbasural.getCalle()+";"+microbasural.getNCalle());
             }
             //cierra el buffer
             bfwriter.close();
@@ -200,7 +145,7 @@ public class MicroBasural {
                     e.setLatitud(delimitar.nextFloat());
                     e.setID(delimitar.nextInt());
                     e.setCalle(delimitar.next());
-                    e.setNumeroCalle(delimitar.nextInt());
+                    e.setNCalle(delimitar.nextInt());
                     
                     LMicroBasural.add(e);
                 }
@@ -218,7 +163,7 @@ public class MicroBasural {
                 BufferedWriter bfwriter = new BufferedWriter(flwriter);
                 for(MicroBasural microbasural :(ArrayList<MicroBasural>)LMicroBasural) {
                     //escribe los datos en el archivo
-                    bfwriter.write(microbasural.getLongitud()+";"+ microbasural.getLatitud()+";"+microbasural.getID()+";"+microbasural.getCalle()+";"+microbasural.getNumeroCalle());
+                    bfwriter.write(microbasural.getLongitud()+";"+ microbasural.getLatitud()+";"+microbasural.getID()+";"+microbasural.getCalle()+";"+microbasural.getNCalle());
                 }
                 bfwriter.close();
                 System.out.println("Archivo modificado ;)");
@@ -237,12 +182,12 @@ public class MicroBasural {
         }             
     }
     
-    public void MostrarListaMicrobasurales(){
+    public void MostrarLista(){
       
         System.out.println("Longitud: "+MB.Longitud);
         System.out.println("Latitud: "+MB.Latitud);
         System.out.println("Calle: "+MB.Calle);
-        System.out.println("Numero de Calle: "+MB.NumeroCalle);
+        System.out.println("Numero de Calle: "+MB.NCalle);
     }
     
     public MicroBasural BuscarCalle(String calle){
@@ -251,7 +196,7 @@ public class MicroBasural {
             System.out.println("Longitud: "+MB.Longitud);
             System.out.println("Latitud: "+MB.Latitud);
             System.out.println("Calle: "+MB.Calle);
-            System.out.println("Numero de Calle: "+MB.NumeroCalle);
+            System.out.println("Numero de Calle: "+MB.NCalle);
             return MB;    
         }
         return null;
@@ -279,12 +224,12 @@ public class MicroBasural {
         System.out.println("Calle: ");
         nuevoMB.Calle= Entrada.next();
         System.out.println("NumeroCalle");
-        nuevoMB.NumeroCalle= Entrada.nextInt();
+        nuevoMB.NCalle= Entrada.nextInt();
         
         MB.setLongitud(nuevoMB.Longitud);
         MB.setLatitud(nuevoMB.Latitud);
         MB.setCalle(nuevoMB.Calle);
-        MB.setNumeroCalle(nuevoMB.NumeroCalle);
+        MB.setNCalle(nuevoMB.NCalle);
         
     }
 }

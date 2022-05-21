@@ -17,139 +17,50 @@ import java.util.Scanner;
  * @author Luz Pinto Castillo
  * @author Sebastian Henriquez Cartagena
  */
-public class Basurero {
+public class Basurero extends Caracteristicas implements Interfaz{
     public ArrayList<Consejo> LConsejo=new ArrayList<Consejo>();
     public ArrayList<Basurero>LBasurero=new ArrayList<Basurero>();
-    //Atributos
-    //Todos los atributos estan relacionados con Tipo
-    private float Latitud; 
-    private float Longitud;
-    private String Calle;
-    private int NCalle;
-    private int ID;
-    private int Tipo; //1:Pilas 2:Plastico 3:Papel 4:Vidrio 5:Organico 6:Metales 
-    
-    
-    //Coleccion
-    
-    /**
-     * 
-     * @param Latitud
-     * @param Longitud
-     * @param ID
-     * @param Tipo
-     * @param NCalle
-     * @param Calle 
-     */
-    public Basurero(float Latitud,float Longitud,int ID,int Tipo,int NCalle,String Calle){
-        this.Longitud=Longitud;
-        this.Latitud=Latitud;
-        this.Calle=Calle;
-        this.NCalle=NCalle;
-        this.ID=ID;
-        this.Tipo=Tipo;
-    }
-    
-    public Basurero() {
-        
-        LBasurero=new ArrayList<Basurero>();
-        LConsejo=new ArrayList<Consejo>();
-    }
- 
-    
-    //Accesores
-    
-    /**
-     * 
-     * @return 
-     */
-    public float getLatitud(){
-        return Latitud;
-    }
-    /**
-     * 
-     * @return 
-     */
-    public float getLongitud(){
-        return Longitud;
-    }
-    /**
-     * 
-     * @return 
-     */
-    public int getID(){
-        return ID;
-    }
-    /**
-     * 
-     * @return 
-     */
-    public int getTipo(){
+
+    private int Tipo;
+
+    public int getTipo() {
         return Tipo;
     }
-    /**
-     * 
-     * @return 
-     */
-    public String getCalle() {
-        return Calle;
+
+    public void setTipo(int Tipo) {
+        this.Tipo = Tipo;
     }
-    /**
-     * 
-     * @return 
-     */
+
+    public float getLatitud() {
+        return Latitud;
+    }
+
+    public float getLongitud() {
+        return Longitud;
+    }
+
     public int getNCalle() {
         return NCalle;
     }
-    
-    //Mutadores
-    
-    /**
-     * 
-     * @param Latitud1 
-     */
-    public void setLatitud(float Latitud1){
-        Latitud = Latitud1;
-    }
-    /**
-     * 
-     * @param Longitud1 
-     */
-    public void setLongitud(float Longitud1){
-        Longitud = Longitud1;
-    }
-    /**
-     * 
-     * @param ID1 
-     */
-    public void setID(int ID1){
-        ID = ID1;
-    }
-    /**
-     * 
-     * @param Tipo1 
-     */
-    public void setTipo(int Tipo1){
-        Tipo = Tipo1;
-    }
-    /**
-     * 
-     * @param Calle 
-     */
-    public void setCalle(String Calle) {
-        this.Calle = Calle;
+
+    public String getCalle() {
+        return Calle;
     }
 
-    public void setNCalle(int NCalle) {
-        this.NCalle = NCalle;
+    public int getID() {
+        return ID;
     }
 
-    //Comportamiento
-    
+    public Basurero(float Latitud, float Longitud, int NCalle, String Calle) {
+        super(Latitud, Longitud, NCalle, Calle);
+    }
+
+    public Basurero() {
+    }   
     
     public void InsertarDato(){
         float Latitud,Longitud;
-        int Tipo,NCalle;
+        int NCalle, opcion;
         String Calle;
         //La ID no se agrego al codigo porque genero error. Esta variable se agregara proximamente.
         Scanner Entrada=new Scanner(System.in);
@@ -157,14 +68,40 @@ public class Basurero {
         Latitud=Entrada.nextFloat();
         System.out.println("Ingrese su Longitud");
         Longitud=Entrada.nextInt();
-        System.out.println("Insertar tipo de Basurero:\n Tipo 1:Pilas\n 2:Plastico\n Tipo 3:Papel\n Tipo 4:Vidrio\n Tipo 5 :Organico\n Tipo 6:Metales.");
-        Tipo=Entrada.nextInt();
+        System.out.println("Ingrese el tipo de basura //1:Pilas 2:Plastico 3:Papel 4:Vidrio 5:Organico 6:Metales");
+        opcion = Entrada.nextInt();
+        switch(opcion){
+            case 1:
+                Tipo= Interfaz.Pilas;
+            break;
+            
+            case 2:
+                Tipo= Interfaz.Plastico;
+            break;
+            
+            case 3:
+                Tipo= Interfaz.Papel;
+            break;
+            
+            case 4:
+                Tipo= Interfaz.Vidrio;
+            break;
+            
+            case 5:
+                Tipo= Interfaz.Organico;
+            break;
+            
+            case 6:
+                Tipo= Interfaz.Metales;
+            break;
+            
+        }
         System.out.println("Ingrese combre de la calle");
         Calle=Entrada.next();
         System.out.println("Ingrese el numero de calle");
         NCalle=Entrada.nextInt();
         //NOTA: Agregar metodo para implementar un ID automatico a cada Basurero al ser agregado a la BD.
-        Basurero basurero=new Basurero(Latitud,Longitud,ID,Tipo,NCalle,Calle);
+        Basurero basurero=new Basurero(Latitud,Longitud,NCalle,Calle);
         LBasurero.add(basurero);
         /*if((Entrada>6)||(Entrada<1)){
             System.out.println("Ingresar tipo valido\n");
@@ -184,7 +121,7 @@ public class Basurero {
             BufferedWriter bfwriter=new BufferedWriter(flwriter);
             for(Basurero basurero :(ArrayList<Basurero>)LBasurero){
                 //escribe los datos en archivo
-                bfwriter.write(basurero.getLatitud()+";"+ basurero.getLongitud()+ ";" + basurero.getTipo()+ ";" + basurero.getCalle()+ ";" + basurero.getNCalle());
+                bfwriter.write(basurero.getID()+";"+basurero.getTipo()+";"+ basurero.getLatitud()+";"+ basurero.getLongitud()+ ";" + basurero.getNCalle()+";"+ basurero.getCalle());
             }
             //cierra el buffer
             bfwriter.close();
@@ -220,7 +157,6 @@ public class Basurero {
                     Basurero e= new Basurero();
                     e.setLatitud(delimitar.nextFloat());
                     e.setLongitud(delimitar.nextFloat());
-                    e.setTipo(delimitar.nextInt());
                     LBasurero.add(e);
                 }
                 //se cierra el ojeto scanner
@@ -237,7 +173,7 @@ public class Basurero {
                 BufferedWriter bfwriter = new BufferedWriter(flwriter);
                 for(Basurero basurero :(ArrayList<Basurero>)LBasurero) {
                     //escribe los datos en el archivo
-                    bfwriter.write(basurero.getLatitud() + ";" + basurero.getLongitud() + ";" + basurero.getTipo() + ";" + basurero.getCalle()+ ";" + basurero.getNCalle());
+                    bfwriter.write(basurero.getID()+";"+basurero.getTipo()+";"+ basurero.getLatitud() + ";" + basurero.getLongitud() + ";" + basurero.getCalle()+ ";" + basurero.getNCalle());
                 }
                 bfwriter.close();
                 System.out.println("Archivo modificado ;)");
@@ -255,13 +191,15 @@ public class Basurero {
             }
         }             
     }
-    public void Eliminar(int ID){
+    public int Eliminar(int ID){
         for(int i=0;i<LBasurero.size();i++){
             
             if(LBasurero.get(i).ID==ID){
                 LBasurero.remove(i);
+                return 0;
             }
         }
+        return 1;
     }
     
     public Basurero BuscarCalle(String calle){
@@ -269,7 +207,7 @@ public class Basurero {
         for(int i=0;i<LBasurero.size();i++){
             
             if(LBasurero.get(i).Calle.equals(calle)){
-                System.out.println(LBasurero.get(i).ID+" " +LBasurero.get(i).Calle+" " +LBasurero.get(i).NCalle+" " +LBasurero.get(i).Tipo+" "+LBasurero.get(i).Latitud+" "+LBasurero.get(i).Longitud);
+                System.out.println(LBasurero.get(i).Tipo+" "+LBasurero.get(i).ID+" " +LBasurero.get(i).Calle+" " +LBasurero.get(i).NCalle+" "+LBasurero.get(i).Latitud+" "+LBasurero.get(i).Longitud);
                 return LBasurero.get(i);    
             }
         }
@@ -282,7 +220,7 @@ public class Basurero {
         for(int i=0;i<LBasurero.size();i++){
             
             if(LBasurero.get(i).Tipo==Tipo){
-                System.out.println(LBasurero.get(i).ID+" " +LBasurero.get(i).Calle+" " +LBasurero.get(i).NCalle+" " +LBasurero.get(i).Tipo+" "+LBasurero.get(i).Latitud+" "+LBasurero.get(i).Longitud);
+                System.out.println(LBasurero.get(i).Tipo+" "+LBasurero.get(i).ID+" " +LBasurero.get(i).Calle+" " +LBasurero.get(i).NCalle+" " +LBasurero.get(i).Tipo+" "+LBasurero.get(i).Latitud+" "+LBasurero.get(i).Longitud);
                 return LBasurero.get(i);    
             }
         }

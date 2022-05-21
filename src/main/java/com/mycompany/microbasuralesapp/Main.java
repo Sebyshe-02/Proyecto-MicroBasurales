@@ -203,7 +203,7 @@ public class Main {
                             
                             case 2:
                                 for(int i=0;i<usuario.LMicroBasurales.size();i++){
-                                    microbasural.MostrarListaMicrobasurales();
+                                    microbasural.MostrarLista();
                                 }
                             break;
                             
