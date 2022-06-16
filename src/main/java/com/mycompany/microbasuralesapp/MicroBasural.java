@@ -10,7 +10,6 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -18,13 +17,9 @@ import java.util.Scanner;
  * @author Luz Pinto Castillo
  * @author Sebastian Henriquez Cartagena
  */
-public class MicroBasural extends Caracteristicas implements Interfaz {
-
+public class MicroBasural extends Caracteristicas implements Interfaz{
+    
     public MicroBasural MB=new MicroBasural();
-    ArrayList<MicroBasural> Lmb=new ArrayList<MicroBasural>();
-    //Zona de prueba ID----------------------------------------------------------------
-    Random Azar =new Random();
-    int ID;
 
     public MicroBasural(float Latitud, float Longitud, int NCalle, String Calle) {
         super(Latitud, Longitud, NCalle, Calle);
@@ -80,21 +75,28 @@ public class MicroBasural extends Caracteristicas implements Interfaz {
      * 
      * @param Objeto 
      */
-    public void Crear(float longitud,float latitud,int Ncalle,String Calle){
+    public MicroBasural Crear(){
         //Crea un objeto de tipo microbasural
         
         MicroBasural nuevoMB=new MicroBasural();
-
-        nuevoMB.Longitud=longitud;
-        nuevoMB.Latitud= latitud;
-        nuevoMB.Calle= Calle;
-        nuevoMB.NCalle= Ncalle;
-        nuevoMB.ID=Azar.nextInt(100 + 1)+1;
-        Lmb.add(nuevoMB);
-        System.out.println("Creado con exito!!");  
         
+        Scanner Entrada=new Scanner(System.in);
+        System.out.println("Longitud: ");
+        nuevoMB.Longitud= Entrada.nextFloat();
+        
+        System.out.println("Latitud: ");
+        nuevoMB.Latitud= Entrada.nextFloat();
+        System.out.println("Calle: ");
+        nuevoMB.Calle= Entrada.next();
+        System.out.println("NumeroCalle");
+        nuevoMB.NCalle= Entrada.nextInt();
+        
+        System.out.println("Creado con exito!!");  
+        return nuevoMB;
+        
+        //La ID no se agrego al codigo porque genero error. Esta variable se agregara proximamente.
     }
-   
+    
     public class OperacionEnArchivo{
         public static void CrearArchivo(ArrayList LMicroBasurales){
         FileWriter flwriter=null;
@@ -179,27 +181,27 @@ public class MicroBasural extends Caracteristicas implements Interfaz {
             }
         }             
     }
-  
+    
     public void MostrarLista(){
-        for(int i=0;i<Lmb.size();i++){
+      
+        System.out.println("Longitud: "+MB.Longitud);
+        System.out.println("Latitud: "+MB.Latitud);
+        System.out.println("Calle: "+MB.Calle);
+        System.out.println("Numero de Calle: "+MB.NCalle);
+    }
+    
+    public MicroBasural BuscarCalle(String calle){
+            
+        if(MB.Calle.equals(calle)){
             System.out.println("Longitud: "+MB.Longitud);
             System.out.println("Latitud: "+MB.Latitud);
             System.out.println("Calle: "+MB.Calle);
             System.out.println("Numero de Calle: "+MB.NCalle);
-        }    
+            return MB;    
+        }
+        return null;
     }
     
-    public void BuscarCalle(String calle){
-        for(int i=0;i<Lmb.size();i++){
-            if(MB.Calle.equals(calle)){
-            System.out.println("Longitud: "+MB.Longitud);
-            System.out.println("Latitud: "+MB.Latitud);
-            System.out.println("Calle: "+MB.Calle);
-            System.out.println("Numero de Calle: "+MB.NCalle); 
-            }
-        }    
-    }
-   
     public int Eliminar(int ID){
         
         if(MB.ID == ID){
@@ -213,7 +215,17 @@ public class MicroBasural extends Caracteristicas implements Interfaz {
         
         MicroBasural nuevoMB=new MicroBasural();
         
-                
+        Scanner Entrada=new Scanner(System.in);
+        System.out.println("Longitud: ");
+        nuevoMB.Longitud= Entrada.nextFloat();
+        
+        System.out.println("Latitud: ");
+        nuevoMB.Latitud= Entrada.nextFloat();
+        System.out.println("Calle: ");
+        nuevoMB.Calle= Entrada.next();
+        System.out.println("NumeroCalle");
+        nuevoMB.NCalle= Entrada.nextInt();
+        
         MB.setLongitud(nuevoMB.Longitud);
         MB.setLatitud(nuevoMB.Latitud);
         MB.setCalle(nuevoMB.Calle);
