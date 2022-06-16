@@ -232,6 +232,7 @@ public class CrearMB extends javax.swing.JFrame {
         menu2.setVisible(true);
         menu2.setBounds(-32768, -32769, 53, 33);
         this.setVisible(false);*/
+        //Buscar forma de no usar 2 botones
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
