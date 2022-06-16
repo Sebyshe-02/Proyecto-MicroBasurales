@@ -168,6 +168,8 @@ public class MenuMB extends javax.swing.JFrame {
         jPopupMenu1.show(MenuMB, 80, 36);
         jButton3.setEnabled(true);
         this.setVisible(false);
+        //Activa un boton solo para aceptar
+        
     }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
