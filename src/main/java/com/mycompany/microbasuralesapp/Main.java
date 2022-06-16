@@ -11,6 +11,7 @@ import java.util.Scanner;
  * @author Luz Pinto Castillo
  */ 
 public class Main {
+    public static InterfazGrafica menu=new InterfazGrafica();
     
     public static Usuario usuario=new Usuario();
     public static Basurero basurero=new Basurero();
