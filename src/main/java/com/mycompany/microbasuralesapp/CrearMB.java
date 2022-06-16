@@ -4,7 +4,6 @@
  */
 package com.mycompany.microbasuralesapp;
 
-import static com.mycompany.microbasuralesapp.InterfazGrafica.menu2;
 
 /**
  *
@@ -12,6 +11,7 @@ import static com.mycompany.microbasuralesapp.InterfazGrafica.menu2;
  */
 public class CrearMB extends javax.swing.JFrame {
     //CLASE MB
+    public static MenuMB menu2=new MenuMB();
     public static MicroBasural MB=new MicroBasural();
     float Long,Lat;
     int NCalle;
